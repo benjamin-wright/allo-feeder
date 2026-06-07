@@ -14,10 +14,19 @@ struct PersistenceController {
     static let preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        let count = Unit(context: viewContext)
+        count.name = "Count"
+        count.unitKind = .Count
+        
+        let weight = Unit(context: viewContext)
+        weight.name = "Grams"
+        weight.unitKind = .Weight
+        
+        let volume = Unit(context: viewContext)
+        volume.name = "Litres"
+        volume.unitKind = .Volume
+        
         do {
             try viewContext.save()
         } catch {

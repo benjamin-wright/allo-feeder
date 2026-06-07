@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		02CA946F2FD5C73A00C78FC9 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 02CA946E2FD5C73400C78FC9 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		02CA943C2FD5BAA300C78FC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		02CA94272FD5BAA200C78FC9 /* allo-feeder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allo-feeder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CA943B2FD5BAA300C78FC9 /* allo-feederTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "allo-feederTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CA94452FD5BAA300C78FC9 /* allo-feederUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "allo-feederUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02CA946E2FD5C73400C78FC9 /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		02CA941E2FD5BAA200C78FC9 = {
 			isa = PBXGroup;
 			children = (
+				02CA946E2FD5C73400C78FC9 /* README.md */,
 				02CA94292FD5BAA200C78FC9 /* allo-feeder */,
 				02CA943E2FD5BAA300C78FC9 /* allo-feederTests */,
 				02CA94482FD5BAA300C78FC9 /* allo-feederUITests */,
@@ -249,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02CA946F2FD5C73A00C78FC9 /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
