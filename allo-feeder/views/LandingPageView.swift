@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TabData: Identifiable {
     var id: Int
@@ -34,5 +35,5 @@ struct LandingPageView: View {
 }
 
 #Preview {
-    LandingPageView()
+    LandingPageView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
