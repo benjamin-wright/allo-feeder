@@ -19,6 +19,10 @@ struct PersistenceController {
         count.name = "Count"
         count.unitKind = .Count
         
+        let slices = Unit(context: viewContext)
+        slices.name = "Slices"
+        slices.unitKind = .Count
+        
         let weight = Unit(context: viewContext)
         weight.name = "Grams"
         weight.unitKind = .Weight

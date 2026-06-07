@@ -23,23 +23,25 @@ struct UnitsList: View {
                 NSSortDescriptor(keyPath: \Unit.name, ascending: true)
             ],
             predicate: NSPredicate(format: "kind == %i", kind.rawValue),
-            animation: .default
+            animation: nil
         )
     }
     
     var body: some View {
         List {
-            ForEach(Array(units), id: \.objectID) { unit in
+            ForEach(units, id: \.objectID) { unit in
                 Text("Unit: " + (unit.name ?? "unknown"))
             }.onDelete(perform: deleteUnits)
         }
         .toolbar {
             EditButton()
         }
+        .id(units.map(\.objectID))
     }
     
     private func deleteUnits(at offsets: IndexSet) {
-        offsets.map { units[$0] }.forEach(context.delete)
+        let objects = offsets.map { units[$0] }
+        objects.forEach(context.delete)
         
         do {
             try context.save()

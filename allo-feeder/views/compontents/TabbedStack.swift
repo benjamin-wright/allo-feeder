@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabPage {
     var title: String
-    var content: AnyView
+    var content: () -> AnyView
 }
 
 struct TabbedStack: View {
@@ -29,14 +29,14 @@ struct TabbedStack: View {
             }
             .frame(maxWidth: .infinity).padding(.top, 16)
             .pickerStyle(.segmented)
-            pages[selectedPage].content.frame(maxWidth: .infinity, maxHeight: .infinity)
+            pages[selectedPage].content().frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
 
 #Preview {
     TabbedStack(pages: [
-        TabPage(title: "First", content: AnyView(Text("First Content"))),
-        TabPage(title: "Second", content: AnyView(Text("Second Content"))),
+        TabPage(title: "First", content: { AnyView(Text("First Content")) }),
+        TabPage(title: "Second", content: { AnyView(Text("Second Content")) }),
     ])
 }
