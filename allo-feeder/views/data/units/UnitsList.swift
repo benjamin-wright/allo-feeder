@@ -9,6 +9,8 @@ import SwiftUI
 import CoreData
 
 struct UnitsList: View {
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+        
     // Store the fetch request configuration
     @FetchRequest var units: FetchedResults<Unit>
     
@@ -17,19 +19,39 @@ struct UnitsList: View {
         // Assign to _fetchRequest to inject the new configuration
         _units = FetchRequest<Unit>(
             entity: Unit.entity(),
-            sortDescriptors: [],
-            predicate: NSPredicate(format: "kind == %i", kind.rawValue)
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \Unit.name, ascending: true)
+            ],
+            predicate: NSPredicate(format: "kind == %i", kind.rawValue),
+            animation: .default
         )
     }
     
     var body: some View {
-        Text("Units:")
-        ForEach(units) { unit in
-            Text("Unit: " + (unit.name ?? "unknown"))
+        List {
+            ForEach(Array(units), id: \.objectID) { unit in
+                Text("Unit: " + (unit.name ?? "unknown"))
+            }.onDelete(perform: deleteUnits)
+        }
+        .toolbar {
+            EditButton()
+        }
+    }
+    
+    private func deleteUnits(at offsets: IndexSet) {
+        offsets.map { units[$0] }.forEach(context.delete)
+        
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            assertionFailure("Failed to save context after delete: \(error)")
         }
     }
 }
 
 #Preview {
-    UnitsList(kind: .Count).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    NavigationStack {
+        UnitsList(kind: .Count).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
 }
