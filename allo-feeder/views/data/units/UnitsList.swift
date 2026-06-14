@@ -10,6 +10,7 @@ import CoreData
 
 struct UnitsList: View {
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    @Environment(\.editMode) private var editMode
         
     // Store the fetch request configuration
     @FetchRequest var units: FetchedResults<Unit>
@@ -33,6 +34,7 @@ struct UnitsList: View {
                 Text("Unit: " + (unit.name ?? "unknown"))
             }.onDelete(perform: deleteUnits)
         }
+        .id((editMode?.wrappedValue.isEditing ?? false) ? "editing" : "viewing")
         .toolbar {
             EditButton()
         }
