@@ -12,7 +12,7 @@ struct PersistenceController {
 
     @MainActor
     static let preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
+        let result = PersistenceController(inMemory: true, cloudKitEnabled: false)
         let viewContext = result.container.viewContext
         
         let count = Unit(context: viewContext)
@@ -42,10 +42,14 @@ struct PersistenceController {
         return result
     }()
 
-    let container: NSPersistentCloudKitContainer
+    let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
-        container = NSPersistentCloudKitContainer(name: "allo_feeder")
+    init(inMemory: Bool = false, cloudKitEnabled: Bool = true) {
+        if cloudKitEnabled {
+            container = NSPersistentCloudKitContainer(name: "allo_feeder")
+        } else {
+            container = NSPersistentContainer(name: "allo_feeder")
+        }
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

@@ -23,7 +23,7 @@ struct UnitsList: View {
                 NSSortDescriptor(keyPath: \Unit.name, ascending: true)
             ],
             predicate: NSPredicate(format: "kind == %i", kind.rawValue),
-            animation: nil
+            animation: .default
         )
     }
     
@@ -36,7 +36,6 @@ struct UnitsList: View {
         .toolbar {
             EditButton()
         }
-        .id(units.map(\.objectID))
     }
     
     private func deleteUnits(at offsets: IndexSet) {
