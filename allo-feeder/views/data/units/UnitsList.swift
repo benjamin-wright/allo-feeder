@@ -23,7 +23,7 @@ struct UnitsList: View {
                 NSSortDescriptor(keyPath: \Unit.name, ascending: true)
             ],
             predicate: NSPredicate(format: "kind == %i", kind.rawValue),
-            animation: .default
+            animation: nil
         )
     }
     
